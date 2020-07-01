@@ -1,15 +1,13 @@
 import React from 'react';
 import './App.css';
-import * as ReactBootStrap from "react-bootstrap"
-import Table from './components/Table'
-import SearchSection from './components/Search';
+import SearchAndTable from "./components/SearchAndTable"
 
 const App = () => {
   return (
-  <container>
-  < SearchSection />
-  < Table />
-  </container>
+  <>
+  < SearchAndTable />
+  </>
+  
   )
 }
 

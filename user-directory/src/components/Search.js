@@ -1,8 +1,8 @@
 import React from 'react';
 
-function SearchSection(){
+function SearchSection(props){
     return(
-        <div className = "container-fluid searchContainer">
+        <form className = "container-fluid search-container" value={props.search}>
             <header className="col s12">
                 <div className="row">
                     <div className="col s6">
@@ -12,22 +12,22 @@ function SearchSection(){
                    <div className="col s6">
                        <div className="input-group mb-3">
                         <input 
-                        type="text" class="form-control" 
-                        placeholder="Username" 
+                        type="text" className="form-control inputBox" 
+                        onChange={props.handleInputChange}
+                        placeholder="User's name" 
                         aria-label="Recipient's username"
-                        id="users"
+                        id="search"
                         name="search"
                         list="users"
-                        className="inputBox" 
                         aria-describedby="basic-addon2"/>
                         <div className="input-group-append">
-                            <button  className="searchButton" type="button">Search</button>
+                            <button onClick={props.handleFormSubmit} className="searchButton" type="button">Search</button>
                          </div>
                         </div>
                    </div>
                 </div>
             </header>
-        </div>
+        </form>
     )
 }
 export default SearchSection
