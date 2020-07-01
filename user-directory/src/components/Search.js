@@ -21,7 +21,7 @@ function SearchSection(){
                         className="inputBox" 
                         aria-describedby="basic-addon2"/>
                         <div className="input-group-append">
-                            <button className="searchButton" type="button">Search</button>
+                            <button  className="searchButton" type="button">Search</button>
                          </div>
                         </div>
                    </div>

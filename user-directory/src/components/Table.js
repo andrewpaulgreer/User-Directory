@@ -1,42 +1,23 @@
 import React from 'react'
 import * as ReactBootStrap from "react-bootstrap"
 
-function Table  () {
-
-const users = [
-    {name: "Dirty Harry", phone: "828-778-8588", email: "Worker@work.com", dob: "04/02/19" },
-    {name: "Dirty Harry", phone: "828-778-8588", email: "Worker@work.com", dob: "04/02/19" },
-    {name: "Dirty Harry", phone: "828-778-8588", email: "Worker@work.com", dob: "04/02/19" },
-    {name: "Dirty Harry", phone: "828-778-8588", email: "Worker@work.com", dob: "04/02/19" },
-    {name: "Dirty Harry", phone: "828-778-8588", email: "Worker@work.com", dob: "04/02/19" },
-  ]
- const renderUser = (user, index)=> {
-  return (
-    <tr>
-      <td>{user.name}</td>
-      <td>{user.phone}</td>
-      <td>{user.email}</td>
-      <td>{user.dob}</td>
-    </tr>
-  );
- }
-
+function Table  (props) {
  return (
-   <div className="col s12 table">
+   <table className="col s12 table">
+    {props.results.map((result) => (
      <ReactBootStrap.Table striped bordered hover>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>first name</th>
+      <th>last name</th>
       <th>Phone</th>
       <th>Email</th>
-      <th>DOB</th>
     </tr>
   </thead>
-  <tbody className="">
-  {users.map(renderUser)}
-  </tbody>
-</ReactBootStrap.Table>
-   </div>
+    </ReactBootStrap.Table>
+    ))}
+   </table>
+   
  )
 }
 
