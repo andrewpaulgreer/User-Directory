@@ -4,7 +4,7 @@ import Card from "./Card.js";
 export default class Table extends Component {
   state = {
     original: [],
-    current: []
+    current: [],
   };
   componentDidMount() {
     this.setState({
@@ -13,21 +13,10 @@ export default class Table extends Component {
     });
   }
 
-  compareBy(key) {
-    return function (a, b) {
-      if (""+a[key]<(""+b[key])) return -1;
-      if (""+a[key]>(""+b[key])) return 1;
-      return 0;
-    };}
+// do sorting here
+
     
-    sortBy(key) {
-    let arrayCopy = [...this.state.original];
-    arrayCopy.sort(this.compareBy(key));
-    //arrayCopy.reverse(); for descending
-    this.setState({data: arrayCopy});
-    } 
-    
-    //write this in th
+  
     
   searchHandler = term => {
     const newList = this.state.original.filter(
@@ -38,18 +27,23 @@ export default class Table extends Component {
       this.setState({
           current: newList
       })
+      console.log(newList)
   };
   render() {
     //return is a callback
     return (
       <>
+      <div>
+        <h1 className="title"><strong>User Directory</strong></h1>
+      </div>
         <input 
-         type="text" className="form-control" aria-label="Large"
+         type="text" className="form-control search" aria-label="Large"
+         placeholder="Search"
         onChange={event => this.searchHandler(event.target.value)} />
         <table className="table table-striped table-dark">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col"><button type="button" onClick={(event) => this.sortBy(event.target.value)}>Number</button></th>
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Email</th>
