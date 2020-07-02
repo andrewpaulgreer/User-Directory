@@ -1,36 +1,54 @@
 import React, { Component } from "react";
-import User from "../lib/user.json";
+import user from "../lib/user.json";
 import Card from "./Card.js";
+
 export default class Table extends Component {
   state = {
     original: [],
     current: [],
+    sortDirection: 1
   };
   componentDidMount() {
     this.setState({
-      original: User,
-      current: User
+      original: user,
+      current: user
     });
   }
 
+  
 // do sorting here
-
+onSortChange = ()=> {
+  if (this.state.sortDirection === 1) {
+    this.setState({ sortDirection: -1 });
+  } else {
+    this.setState({ sortDirection: 1 });
+  }
+}
     
   
     
-  searchHandler = term => {
-    const newList = this.state.original.filter(
+  handleSearches = term => {
+    const updatedList = this.state.original.filter(
       user =>
         user.name.first.toLowerCase().includes(term.toLowerCase()) ||
         user.name.last.toLowerCase().includes(term.toLowerCase())
        );
       this.setState({
-          current: newList
+          current: updatedList
       })
-      console.log(newList)
+      console.log(updatedList)
   };
   render() {
-    //return is a callback
+   
+
+    const sorted = this.state.current.sort((a, b) => {
+      if (this.state.sortDirection === 1) {
+        return a.name.first > b.name.first ? 1 : -1
+      } else {
+        return a.name.first < b.name.first ? 1 : -1
+      }
+    });
+
     return (
       <>
       <div>
@@ -39,20 +57,19 @@ export default class Table extends Component {
         <input 
          type="text" className="form-control search" aria-label="Large"
          placeholder="Search"
-        onChange={event => this.searchHandler(event.target.value)} />
+        onChange={event => this.handleSearches(event.target.value)} />
         <table className="table table-striped table-dark">
           <thead>
             <tr>
-              <th scope="col"><button type="button" onClick={(event) => this.sortBy(event.target.value)}>Number</button></th>
-              <th scope="col">First Name</th>
+              <th scope="col">number</th>
+              <th scope="col"><button type="button" onClick={this.onSortChange}>First Name</button></th>
               <th scope="col">Last Name</th>
               <th scope="col">Email</th>
               <th scope="col">Cell Phone</th>
             </tr>
           </thead>
           <tbody>
-            {/* that is a component below */}
-            {this.state.current.map((user, index) => (
+            {sorted.map((user, index) => (
               <Card User={user} index={index} key={user.id.value} />
             ))}
           </tbody>
